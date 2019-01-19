@@ -11,6 +11,7 @@ public class scr_mouvement : MonoBehaviour {
 	int onrail = 2;
 	int aimed_rail = 2;
 	Vector3 position;
+	bool jumping = false;
 
 
     Animator animator;
@@ -30,10 +31,10 @@ public class scr_mouvement : MonoBehaviour {
     	//Debug.Log("position X : " + position.x.ToString() + "//aimed position x : " + aimed_X.ToString());
     	
 
-    	if (aimed_rail != onrail){
+		if (aimed_rail != onrail){
     		distance = position.x - aimed_X;
 
-    		Debug.Log("distance to rail :" + distance.ToString());
+    		//Debug.Log("distance to rail :" + distance.ToString());
 
     		if (Math.Abs(distance) < VIT_LATERAL){ 	//arrivé
     			position.x = (float)aimed_X;
@@ -47,24 +48,28 @@ public class scr_mouvement : MonoBehaviour {
 
 
  			transform.position = position;
+    	} else {
+    		jumping = animator.GetCurrentAnimatorStateInfo(0).IsName("jump");
 
-    	}else {
-    		if (Input.GetKeyDown(KeyCode.LeftArrow) && onrail != 1){
+    		if (Input.GetKeyDown("space") && !jumping ){
+				animator.SetTrigger("jumping");
+				jumping = true;
+
+    		}
+
+
+    		if (Input.GetKeyDown(KeyCode.LeftArrow) && onrail != 1 && !jumping){
     			aimed_rail--;
     			if (!animator.GetCurrentAnimatorStateInfo(0).IsName("jump_left")){
     				animator.SetTrigger("move_left");
     			}
 	            
-    		}
-    		if (Input.GetKeyDown(KeyCode.RightArrow) && onrail != 3){
+    		} if (Input.GetKeyDown(KeyCode.RightArrow) && onrail != 3 && !jumping){
     			aimed_rail++;
     			if (!animator.GetCurrentAnimatorStateInfo(0).IsName("jump_right")){
 	            	animator.SetTrigger("move_right");
 	        	}
     		}
-
-
-
     	}
         
     }
