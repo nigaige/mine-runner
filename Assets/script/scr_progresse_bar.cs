@@ -2,44 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class scr_progresse_bar : MonoBehaviour
-{
+public class scr_progresse_bar : MonoBehaviour {
 	float progress = 0;
 	Vector3 Scale;
 	Vector3 position;
-	GameObject go;
 	int level = 1;
+
 	bool pause = false;
+    bool ended = false;
 
-    void Start(){
-                go = GameObject.Find("dwarf_character");
+    GameObject go;
+    scr_score scriptsc;
 
+    void Start() {
+        go = GameObject.Find("dwarf_character");
+        scriptsc = (scr_score) go.GetComponent(typeof(scr_score));
     }
 
-    // Update is called once per frame
-    void Update(){
+    void Update() {
 
-    	scr_score scriptsc = (scr_score) go.GetComponent(typeof(scr_score));
 		pause = scriptsc.pause();
-    	Scale = transform.localScale;
+    	ended = scriptsc.ended();
+
+
+        Scale = transform.localScale;
     	Scale.x = progress;
     	
-    	if (!pause){
+    	if (!pause && !ended) {
     		progress++;
     	}
     	transform.localScale = Scale;
-    	if(progress == 300){
+    	if(progress == 300) {
     		progress = 0;
 			level++;
     	}
 
     }
 
-    public int getLevel(){
+    public int getLevel() {
     	return level;
     }
 
-    public void reset(){
+    public void reset() {
         level = 1;
         progress = 0;
     }

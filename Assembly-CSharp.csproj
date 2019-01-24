@@ -53,7 +53,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scenes\NewBehaviourScript.cs" />
      <Compile Include="Assets\script\scr_button.cs" />
      <Compile Include="Assets\script\scr_coin.cs" />
      <Compile Include="Assets\script\scr_Coin_generator.cs" />

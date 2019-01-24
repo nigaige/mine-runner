@@ -3,27 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class scr_death_screen : MonoBehaviour {
-    // Start is called before the first frame update
     Vector3 deathscreen= new Vector3(-150,0,0);
-    Vector3 waitscreen= new Vector3(-1000,0,0);
-	GameObject go;
-
+    Vector3 waitscreen= new Vector3(-10000,0,0);
+	
+    GameObject go;
+    scr_score script;
+    
 	bool gameover = false;
-
-    void Start()
-    {
+    
+    void Start() {
         go = GameObject.Find("dwarf_character");
-
+        script = (scr_score) go.GetComponent(typeof(scr_score));
     }
 
-    // Update is called once per frame
     void Update(){
-        scr_score script = (scr_score) go.GetComponent(typeof(scr_score));
 		gameover = script.ended();
-		Debug.Log(gameover);
+
 		if (gameover){
-			isDead();}
-		else{
+			isDead();
+        } else{
 			isnotDead();
 		}
     }
@@ -31,9 +29,8 @@ public class scr_death_screen : MonoBehaviour {
     void isDead(){
     	transform.localPosition = deathscreen;
     }
+    
     void isnotDead(){
     	transform.localPosition = waitscreen;
     }
-
-
 }

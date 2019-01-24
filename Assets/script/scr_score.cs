@@ -7,13 +7,15 @@ public class scr_score : MonoBehaviour {
     int score = 0;
     public Text text_score;
     int level;
-	GameObject gpb;
+    Vector3 positionMsg;
+
 	bool dead = false;
 	bool paused = false;
+
+    GameObject gpb;
 	GameObject gds;
 	GameObject gdm;
-	Vector3 positionMsg;
-
+    scr_progresse_bar scriptPB;
 
     void Start() {
     	init_score();
@@ -21,20 +23,18 @@ public class scr_score : MonoBehaviour {
     	gpb = GameObject.Find("progress_bar");
     	gds = GameObject.Find("deathscreen");
     	gdm = GameObject.Find("death_msg");
+        scriptPB = (scr_progresse_bar) gpb.GetComponent(typeof(scr_progresse_bar));
 
     }
 
-    // Update is called once per frame
     void Update() {
-    	scr_progresse_bar scriptPB = (scr_progresse_bar) gpb.GetComponent(typeof(scr_progresse_bar));
 		level = scriptPB.getLevel();
         Updatescore();
-
 
         if (dead){
             if (Input.GetKeyDown("space")){
                 dead = false;
-                score = 0;
+                init_score();
                 scriptPB.reset();
             }
         }
@@ -49,7 +49,6 @@ public class scr_score : MonoBehaviour {
 
     public void gotCoin(int coin){
     	score += coin;
-    	//Debug.Log("ding");
     }
 
     public void clickPause(){
@@ -64,9 +63,6 @@ public class scr_score : MonoBehaviour {
     }
 
     public void death(){
-    	Debug.Log("death");
-
     	dead = true;
-
     }
 }

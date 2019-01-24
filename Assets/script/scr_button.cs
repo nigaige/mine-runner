@@ -9,23 +9,15 @@ public class scr_button : MonoBehaviour
 	public Button pauseButton;
 
 	GameObject gd;
+    scr_score scriptD;
 
     void Start(){
     	pauseButton.onClick.AddListener(click);
-    	gd = GameObject.Find("dwarf_character");
-
-        
-    }
-
-    // Update is called once per frame
-    void Update(){
-
-		
+    	gd = GameObject.Find("dwarf_character");   
+        scriptD = (scr_score) gd.GetComponent(typeof(scr_score));     
     }
 
     void click(){
-    	Debug.Log("click");
-    	scr_score scriptD = (scr_score) gd.GetComponent(typeof(scr_score));
 		scriptD.clickPause();
     }
 }

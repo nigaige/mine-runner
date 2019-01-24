@@ -1529,6 +1529,7 @@ GameObject:
   - component: {fileID: 878040564}
   - component: {fileID: 878040566}
   - component: {fileID: 878040565}
+  - component: {fileID: 878040567}
   m_Layer: 5
   m_Name: death_msg
   m_TagString: Untagged
@@ -1569,7 +1570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1600,6 +1601,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 878040563}
   m_CullTransparentMesh: 0
+--- !u!114 &878040567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878040563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3020fccb87392d43a47be60e84cda30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &897579749 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1424420657588768, guid: 4b21303637197634bb0751d7a1830953,
@@ -1692,6 +1705,7 @@ GameObject:
   - component: {fileID: 930634617}
   - component: {fileID: 930634619}
   - component: {fileID: 930634618}
+  - component: {fileID: 930634620}
   m_Layer: 5
   m_Name: deathscreen
   m_TagString: Untagged
@@ -1755,6 +1769,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 930634616}
   m_CullTransparentMesh: 0
+--- !u!114 &930634620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930634616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acd7fc7f74064584c97e72b0421fae95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1011992968 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1424420657588768, guid: 4b21303637197634bb0751d7a1830953,

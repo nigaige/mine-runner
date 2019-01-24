@@ -9,8 +9,11 @@ public class scr_rail : MonoBehaviour {
     Vector3 position;
 
     Vector3 originalPosition;
+
 	GameObject gpb;
-		GameObject go;
+    scr_progresse_bar scriptPB;
+     GameObject go;
+    scr_score scriptsc;
 
 	int level = 0;
 	bool pause = false;
@@ -18,20 +21,18 @@ public class scr_rail : MonoBehaviour {
 
     void Start(){
         originalPosition = transform.position;
-        position = transform.position;
         gpb = GameObject.Find("progress_bar");
         go = GameObject.Find("dwarf_character");
-
+        scriptPB = (scr_progresse_bar) gpb.GetComponent(typeof(scr_progresse_bar));
+        scriptsc = (scr_score) go.GetComponent(typeof(scr_score));
     }
 
-    // Update is called once per frame
     void Update(){
 
-		scr_progresse_bar scriptPB = (scr_progresse_bar) gpb.GetComponent(typeof(scr_progresse_bar));
 		level = scriptPB.getLevel();
-		scr_score scriptsc = (scr_score) go.GetComponent(typeof(scr_score));
 		pause = scriptsc.pause();
         ended = scriptsc.ended();
+
         if (ended){
             transform.position = originalPosition;
         }
@@ -40,9 +41,11 @@ public class scr_rail : MonoBehaviour {
 		if (!pause && !ended){
     		position.z -= cart_speed * level;
 		}
+
         if (position.z < view_mini){
         	position.z = view_maxi;
         }
+        
         transform.position = position;
     }
 }

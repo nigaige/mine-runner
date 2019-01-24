@@ -16,10 +16,12 @@ public class scr_Rock : MonoBehaviour {
     GameObject go;
     GameObject gh;
     GameObject gpb;
+    scr_progresse_bar scriptPB;
+    scr_score scriptsc;
+    scr_mouvement script;
+    scr_dwarf_height scriptH;
     int level = 0;
     bool pause = false;
-
-
 
 
     void Start(){
@@ -27,59 +29,48 @@ public class scr_Rock : MonoBehaviour {
         go = GameObject.Find("dwarf_character");
         gh = GameObject.Find("Character1_Hips");
         gpb = GameObject.Find("progress_bar");
-
+        scriptPB = (scr_progresse_bar) gpb.GetComponent(typeof(scr_progresse_bar));
+        scriptsc = (scr_score) go.GetComponent(typeof(scr_score));
+        script = (scr_mouvement) go.GetComponent(typeof(scr_mouvement));
+        scriptH = (scr_dwarf_height) gh.GetComponent(typeof(scr_dwarf_height));
     }
 
     void Update(){
-        position = transform.position;
-        position.y = -2;
-
-        scr_progresse_bar scriptPB = (scr_progresse_bar) gpb.GetComponent(typeof(scr_progresse_bar));
-        level = scriptPB.getLevel();
-        scr_score scriptsc = (scr_score) go.GetComponent(typeof(scr_score));
-        pause = scriptsc.pause();
 
         if (scriptsc.ended()){
             deleteRock();
         }
 
-        
-        scr_mouvement script = (scr_mouvement) go.GetComponent(typeof(scr_mouvement));
-        scr_dwarf_height scriptH = (scr_dwarf_height) gh.GetComponent(typeof(scr_dwarf_height));
-
         dwarf_position = go.transform.position;
         dwarf_jumping = scriptH.get_Y();
+        level = scriptPB.getLevel();
+        pause = scriptsc.pause();
 
+        position = transform.position;
+        position.y = -2;
 
         if (!pause){
             position.z -= rock_speed * level;
         }
+
         if (position.z < view_mini){
             deleteRock();
         }
+
         transform.position = position;
 
-
-        if (Math.Abs(dwarf_position.x - position.x) < 2 && Math.Abs(dwarf_position.z - position.z) < 3 && dwarf_jumping < 2){
+        if (Math.Abs(dwarf_position.x - position.x) < 2 && Math.Abs(dwarf_position.z - position.z) < 3 && dwarf_jumping < 2){//rentre dans un caillou
             hit();
             deleteRock();
         }
-
-
     }
-
-
 
     void deleteRock(){
         Destroy(gameObject);
     }
 
     void hit(){
-        //GameObject.Find("dwarf_character").gotCoin();
-        //go = GameObject.Find("dwarf_character");
-
-        scr_score script = (scr_score) go.GetComponent(typeof(scr_score));
-        script.death();
+        scriptsc.death();
     }
 
     void getlevel(){

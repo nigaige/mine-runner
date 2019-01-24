@@ -13,8 +13,9 @@ public class scr_Red_coin : MonoBehaviour {
     float dwarf_position;
 
 	GameObject go;
-
+    scr_score scriptsc;
 	GameObject gpb;
+    scr_progresse_bar scriptPB;
 	int level = 0;
 	bool pause = false;
 
@@ -22,16 +23,15 @@ public class scr_Red_coin : MonoBehaviour {
     void Start(){
         position = transform.position;
         gpb = GameObject.Find("progress_bar");
+        scriptPB = (scr_progresse_bar) gpb.GetComponent(typeof(scr_progresse_bar));
         go = GameObject.Find("dwarf_character");
-
+        scriptsc = (scr_score) go.GetComponent(typeof(scr_score));
     }
 
     void Update(){
     	position = transform.position;
-		dwarf_position = GameObject.Find("dwarf_character").transform.position.x;
-		scr_progresse_bar scriptPB = (scr_progresse_bar) gpb.GetComponent(typeof(scr_progresse_bar));
+		dwarf_position = go.transform.position.x;
 		level = scriptPB.getLevel();
-		scr_score scriptsc = (scr_score) go.GetComponent(typeof(scr_score));
 		pause = scriptsc.pause();
 
         if (scriptsc.ended()){
@@ -41,32 +41,25 @@ public class scr_Red_coin : MonoBehaviour {
 		if (!pause){
     		position.z -= coin_speed * level;
 		}
+
         if (position.z < view_mini){
         	deleteCoin();
         }
-        transform.position = position;
 
+        transform.position = position;
 		transform.Rotate(Vector3.down * Time.deltaTime * rotation_speed);
 
-		if (Math.Abs(dwarf_position - position.x) < 2 && position.z < 5){
+		if (Math.Abs(dwarf_position - position.x) < 2 && position.z < 5){//piece attrapé
 			score();
 			deleteCoin();
 		}
-
-
     }
-
-
 
     void deleteCoin(){
     	Destroy(gameObject);
     }
 
     void score(){
-    	//GameObject.Find("dwarf_character").gotCoin();
-    	go = GameObject.Find("dwarf_character");
-
-        scr_score script = (scr_score) go.GetComponent(typeof(scr_score));
-		script.gotCoin(5);
+		scriptsc.gotCoin(5);
     }
 }
