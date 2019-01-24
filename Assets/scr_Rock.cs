@@ -5,7 +5,7 @@ using System;
 
 
 public class scr_Rock : MonoBehaviour {
-	float coin_speed = 0.5f;
+	float rock_speed = 0.5f;
 	const float view_mini = -10;
     const float view_maxi = 90;
     const float rotation_speed = 150;
@@ -15,6 +15,9 @@ public class scr_Rock : MonoBehaviour {
 
 	GameObject go;
 	GameObject gh;
+	GameObject gpb;
+	int level = 0;
+	bool pause = false;
 
 
 
@@ -23,12 +26,18 @@ public class scr_Rock : MonoBehaviour {
         position = transform.position;
         go = GameObject.Find("dwarf_character");
         gh = GameObject.Find("Character1_Hips");
+        gpb = GameObject.Find("progress_bar");
 
     }
 
     void Update(){
     	position = transform.position;
     	position.y = -2;
+
+		scr_progresse_bar scriptPB = (scr_progresse_bar) gpb.GetComponent(typeof(scr_progresse_bar));
+		level = scriptPB.getLevel();
+		scr_score scriptsc = (scr_score) go.GetComponent(typeof(scr_score));
+		pause = scriptsc.pause();
 
 
     	
@@ -37,11 +46,11 @@ public class scr_Rock : MonoBehaviour {
 
 		dwarf_position = go.transform.position;
 		dwarf_jumping = scriptH.get_Y();
-		Debug.Log(dwarf_jumping);
 
 
-
-    	position.z -= coin_speed;
+		if (!pause){
+    		position.z -= rock_speed * level;
+        }
         if (position.z < view_mini){
         	deleteCoin();
         }
@@ -68,5 +77,9 @@ public class scr_Rock : MonoBehaviour {
 
         scr_score script = (scr_score) go.GetComponent(typeof(scr_score));
 		script.death();
+    }
+
+    void getlevel(){
+
     }
 }

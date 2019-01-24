@@ -53,10 +53,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\scr_button.cs" />
      <Compile Include="Assets\scr_coin.cs" />
      <Compile Include="Assets\scr_Coin_generator.cs" />
      <Compile Include="Assets\scr_dwarf_height.cs" />
      <Compile Include="Assets\scr_mouvement.cs" />
+     <Compile Include="Assets\scr_progresse_bar.cs" />
      <Compile Include="Assets\scr_rail.cs" />
      <Compile Include="Assets\scr_Red_coin.cs" />
      <Compile Include="Assets\scr_Rock.cs" />

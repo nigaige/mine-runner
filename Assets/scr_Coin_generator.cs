@@ -20,15 +20,22 @@ public class scr_Coin_generator : MonoBehaviour {
 
 	int Rock_timer = 0;
 
+	bool pause = false;
+	GameObject go;
 
 
 
     void Start(){
-        
+        go = GameObject.Find("dwarf_character");
+
     }
 
     void Update(){
-    	
+    	scr_score scriptsc = (scr_score) go.GetComponent(typeof(scr_score));
+		pause = scriptsc.pause();
+
+
+
     	//gestion coin
     	if (timer == 0){
     		if (sequence == 0){
@@ -70,15 +77,21 @@ public class scr_Coin_generator : MonoBehaviour {
     		}
 
     	}else {
-    		timer--;
+    		if (!pause){
+    			timer--;
+    		}
     	}
 
     	//gestion rock
     	if (Rock_timer == 0){
-    		newObject(random.Next(1, 5), Rock);
+    		newObject(random.Next(1, 4), Rock);
     		Rock_timer = 50;
     	}else{
-    		Rock_timer--;
+
+
+    		if (!pause){
+    			Rock_timer--;
+    		}
     	}
 
 

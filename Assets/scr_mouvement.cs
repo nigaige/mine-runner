@@ -13,16 +13,23 @@ public class scr_mouvement : MonoBehaviour {
 	Vector3 position;
 	static bool jumping = false;
 
+	GameObject go;
+	bool pause = false;
 
-    Animator animator;
+	Animator animator;
     
 
     void Start(){
-    	 animator = GetComponent<Animator>();
+    	animator = GetComponent<Animator>();
+                go = GameObject.Find("dwarf_character");
 
 		position = transform.position;
     }
     void Update(){
+    	scr_score scriptsc = (scr_score) go.GetComponent(typeof(scr_score));
+		pause = scriptsc.pause();
+
+
 		position = transform.position;
 		double aimed_X = RAIL_X[aimed_rail - 1];
 		double distance = 0;
@@ -30,46 +37,47 @@ public class scr_mouvement : MonoBehaviour {
 		//Debug.Log("on rail : " + onrail.ToString() + "//aimed rail : " + aimed_rail.ToString());
     	//Debug.Log("position X : " + position.x.ToString() + "//aimed position x : " + aimed_X.ToString());
     	
+		if (!pause){
+			if (aimed_rail != onrail){
+	    		distance = position.x - aimed_X;
 
-		if (aimed_rail != onrail){
-    		distance = position.x - aimed_X;
+	    		//Debug.Log("distance to rail :" + distance.ToString());
 
-    		//Debug.Log("distance to rail :" + distance.ToString());
+	    		if (Math.Abs(distance) < VIT_LATERAL){ 	//arrivé
+	    			position.x = (float)aimed_X;
+	    			onrail = aimed_rail;
 
-    		if (Math.Abs(distance) < VIT_LATERAL){ 	//arrivé
-    			position.x = (float)aimed_X;
-    			onrail = aimed_rail;
-
-    		}else if (position.x > aimed_X){	//déplace a gauche
-    			position.x -= (float)VIT_LATERAL;
-    		}else if (position.x < aimed_X){	//déplace a droite
-    			position.x += (float)VIT_LATERAL;
-    		}
-
-
- 			transform.position = position;
-    	} else {
-    		jumping = animator.GetCurrentAnimatorStateInfo(0).IsName("jump");
-
-    		if (Input.GetKeyDown("space") && !jumping ){
-				animator.SetTrigger("jumping");
-				jumping = true;
-
-    		}
+	    		}else if (position.x > aimed_X){	//déplace a gauche
+	    			position.x -= (float)VIT_LATERAL;
+	    		}else if (position.x < aimed_X){	//déplace a droite
+	    			position.x += (float)VIT_LATERAL;
+	    		}
 
 
-    		if (Input.GetKeyDown(KeyCode.LeftArrow) && onrail != 1 && !jumping){
-    			aimed_rail--;
-    			if (!animator.GetCurrentAnimatorStateInfo(0).IsName("jump_left")){
-    				animator.SetTrigger("move_left");
-    			}
-	            
-    		} if (Input.GetKeyDown(KeyCode.RightArrow) && onrail != 3 && !jumping){
-    			aimed_rail++;
-    			if (!animator.GetCurrentAnimatorStateInfo(0).IsName("jump_right")){
-	            	animator.SetTrigger("move_right");
-	        	}
-    		}
+	 			transform.position = position;
+	    	} else {
+	    		jumping = animator.GetCurrentAnimatorStateInfo(0).IsName("jump");
+
+	    		if (Input.GetKeyDown("space") && !jumping ){
+					animator.SetTrigger("jumping");
+					jumping = true;
+
+	    		}
+
+
+	    		if (Input.GetKeyDown(KeyCode.LeftArrow) && onrail != 1 && !jumping){
+	    			aimed_rail--;
+	    			if (!animator.GetCurrentAnimatorStateInfo(0).IsName("jump_left")){
+	    				animator.SetTrigger("move_left");
+	    			}
+		            
+	    		} if (Input.GetKeyDown(KeyCode.RightArrow) && onrail != 3 && !jumping){
+	    			aimed_rail++;
+	    			if (!animator.GetCurrentAnimatorStateInfo(0).IsName("jump_right")){
+		            	animator.SetTrigger("move_right");
+		        	}
+	    		}
+	    	}
     	}
         
     }

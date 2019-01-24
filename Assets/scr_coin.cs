@@ -13,21 +13,33 @@ public class scr_coin : MonoBehaviour {
     float dwarf_position;
 
 	GameObject go;
-
-
+	GameObject gpb;
+	int level = 0;
+	bool pause = false;
 
 
     void Start(){
         position = transform.position;
+        gpb = GameObject.Find("progress_bar");
+        go = GameObject.Find("dwarf_character");
+
     }
 
     void Update(){
+
+
+		scr_progresse_bar scriptPB = (scr_progresse_bar) gpb.GetComponent(typeof(scr_progresse_bar));
+		level = scriptPB.getLevel();
+		scr_score scriptsc = (scr_score) go.GetComponent(typeof(scr_score));
+		pause = scriptsc.pause();
+
     	position = transform.position;
 		dwarf_position = GameObject.Find("dwarf_character").transform.position.x;
 
 
-
-    	position.z -= coin_speed;
+		if (!pause){
+    		position.z -= coin_speed * level;
+        }
         if (position.z < view_mini){
         	deleteCoin();
         }
