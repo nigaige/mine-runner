@@ -11,7 +11,7 @@ public class scr_mouvement : MonoBehaviour {
 	int onrail = 2;
 	int aimed_rail = 2;
 	Vector3 position;
-	bool jumping = false;
+	static bool jumping = false;
 
 
     Animator animator;
@@ -73,4 +73,8 @@ public class scr_mouvement : MonoBehaviour {
     	}
         
     }
+
+    public static bool is_jumping(){
+		return jumping;
+	}
 }
