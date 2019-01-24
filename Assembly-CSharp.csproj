@@ -53,16 +53,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\scr_button.cs" />
-     <Compile Include="Assets\scr_coin.cs" />
-     <Compile Include="Assets\scr_Coin_generator.cs" />
-     <Compile Include="Assets\scr_dwarf_height.cs" />
-     <Compile Include="Assets\scr_mouvement.cs" />
-     <Compile Include="Assets\scr_progresse_bar.cs" />
-     <Compile Include="Assets\scr_rail.cs" />
-     <Compile Include="Assets\scr_Red_coin.cs" />
-     <Compile Include="Assets\scr_Rock.cs" />
-     <Compile Include="Assets\scr_score.cs" />
+     <Compile Include="Assets\Scenes\NewBehaviourScript.cs" />
+     <Compile Include="Assets\script\scr_button.cs" />
+     <Compile Include="Assets\script\scr_coin.cs" />
+     <Compile Include="Assets\script\scr_Coin_generator.cs" />
+     <Compile Include="Assets\script\scr_death_screen.cs" />
+     <Compile Include="Assets\script\scr_deathmsg.cs" />
+     <Compile Include="Assets\script\scr_dwarf_height.cs" />
+     <Compile Include="Assets\script\scr_mouvement.cs" />
+     <Compile Include="Assets\script\scr_progresse_bar.cs" />
+     <Compile Include="Assets\script\scr_rail.cs" />
+     <Compile Include="Assets\script\scr_Red_coin.cs" />
+     <Compile Include="Assets\script\scr_Rock.cs" />
+     <Compile Include="Assets\script\scr_score.cs" />
      <None Include="Assets\Game\materials\ToonBasic.shader" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/nicol/Documents/mine runner/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
